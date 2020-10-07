@@ -1,2 +1,2 @@
 # Java-SDA8
-SDA(
+SDA

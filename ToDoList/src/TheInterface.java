@@ -34,28 +34,28 @@ public class TheInterface {
         do{
             switch (in) {
                 case 1: System.out.println("Number of active tasks");
-                     todoList.print();
-                     System.out.println("**************************");
-                     start();
-                     break;
+                    todoList.print();
+                    System.out.println("**************************");
+                    start();
+                    break;
                 case 2: System.out.println("Please write the task:");
-                     String newTask=scanner.nextLine();
-                     this.todoList.add(newTask);
-                     System.out.println(newTask + " added to the list");
-                     System.out.println("**************************");
-                     start();
-                     break;
-                 case 3: System.out.println("Edit Task");
-                     int removal = scanner.nextInt();
-                     todoList.remove(removal);
-                     System.out.println("**************************");
-                     start();
-                     break;
-                 case 4: System.out.println("Save and Quit");
-                     x=2;
-                     break;
-                 default: System.out.println("Please choose a valid option");
-        }} while (x==1);
+                    String newTask=scanner.nextLine();
+                    this.todoList.add(newTask);
+                    System.out.println(newTask + " added to the list");
+                    System.out.println("**************************");
+                    start();
+                    break;
+                case 3: System.out.println("Edit Task");
+                    int removal = scanner.nextInt();
+                    todoList.remove(removal);
+                    System.out.println("**************************");
+                    start();
+                    break;
+                case 4: System.out.println("Save and Quit");
+                    x=2;
+                    break;
+                default: System.out.println("Please choose a valid option");
+            }} while (x==1);
 
 
 

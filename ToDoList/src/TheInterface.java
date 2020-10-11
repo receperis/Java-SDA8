@@ -10,10 +10,13 @@ public class TheInterface {
 
     }
 
-    void start(){
-
-
+    void welcome(){
         System.out.println(">> Welcome to To Do List");
+
+
+    }
+
+    void start(){
         System.out.println(">> You have " + todoList.getSize() + " tasks to do " +
                 "and " + todoList.getExListSize() + " tasks are done");
         System.out.println(">> (1) Show Task List (by date or project)");
@@ -33,8 +36,8 @@ public class TheInterface {
         //Display the title of the chosen module
         do{
             switch (in) {
-                case 1: System.out.println("Number of active tasks");
-                    todoList.print();
+                case 1: System.out.println("List of active tasks");
+                    this.todoList.print();
                     System.out.println("**************************");
                     start();
                     break;
@@ -45,16 +48,20 @@ public class TheInterface {
                     System.out.println("**************************");
                     start();
                     break;
-                case 3: System.out.println("Edit Task");
+                case 3: System.out.println("Choose which task to remove");
+                    todoList.print();
                     int removal = scanner.nextInt();
-                    todoList.remove(removal);
+                    this.todoList.remove(removal);
+                    System.out.println("Task removed");
                     System.out.println("**************************");
                     start();
                     break;
-                case 4: System.out.println("Save and Quit");
+                case 4: System.out.println("Saved and Quit");
                     x=2;
                     break;
                 default: System.out.println("Please choose a valid option");
+                    start();
+                    break;
             }} while (x==1);
 
 

@@ -31,8 +31,9 @@ public class TodoList {
     }
 
     public void remove(int number){
-        lists.remove(number-1);
         exlist.add(lists.get(number-1));
+        lists.remove(number-1);
+
 
     }
 

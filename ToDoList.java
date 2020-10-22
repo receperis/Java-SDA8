@@ -14,6 +14,7 @@ public class ToDoList implements Serializable {
     protected String status;
     protected LocalDate date;
 
+
     private String path = "/Users/eris/Desktop/IP2/";
 
 
@@ -22,10 +23,11 @@ public class ToDoList implements Serializable {
         this.exList = new ArrayList<>();
     }
 
-    public ToDoList(String subject, String title, String status, String date) {
+    public ToDoList(String project, String title, String status, String date) {
+
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-        this.project = subject;
+        this.project = project;
         this.date = LocalDate.parse(date, formatter);
         this.title = title;
         this.status = status;
@@ -33,7 +35,7 @@ public class ToDoList implements Serializable {
 
     public String toString() {
 
-        // Color codes for text
+        // //color codes for visual purposes
           final String ANSI_RESET = "\u001B[0m";
           final String ANSI_RED = "\u001B[31m";
           final String ANSI_GREEN = "\u001B[32m";
@@ -83,13 +85,42 @@ public class ToDoList implements Serializable {
     }
 
 
+
+    public void setProject(String newProject){
+        this.project = newProject;
+    }
+
+    public void setDate(LocalDate newDate){
+        this.date = newDate;
+    }
+
+    public void setStatus(String newStatus){
+        this.status=newStatus;
+    }
+
+    public void setTitle(String newTitle){
+        this.title = newTitle;
+    }
+
+    public ToDoList pickList(int number) {
+        return lists.get(number - 1);
+    }
+
+
+
     public int getExListSize() {
         return exList.size();
     }
 
 
+
+
     public void remove(int number) {
         exList.add(lists.get(number - 1));
+        lists.remove(number - 1);
+    }
+
+    public void cancel(int number) {
         lists.remove(number - 1);
     }
 

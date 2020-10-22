@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
+
     public static void main(String[] args) throws IOException {
 
         ToDoList list = new ToDoList();
@@ -13,17 +14,18 @@ public class Main {
 
 
 
-        while(1==1){ // To restart the code, in case user enters an invalid input.
+        while(user.exit == 1){ // While loop in order to restart the code.
+                                // While loop breaks when exit++ in SaveandQuit() or QuitWithoutSave() methods.
             try {
                 user.startProcess();
             } catch (Exception e) {
                 System.out.println("\nInvalid Entry. " +
                                  "\nPress (Enter) to try again.");
                 scanner.nextLine(); // to clean the scanner. Otherwise it could go into an infinite loop.
+                System.in.read(); // requires (Enter) to restart the process
 
-                System.in.read(); // requires (enter) to restart the process
+                continue; // restarts the loop
 
-                continue; // restarts the process
             }
         }
 

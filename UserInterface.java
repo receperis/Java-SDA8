@@ -1,9 +1,13 @@
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class UserInterface {
     private ToDoList theList;
     private Scanner scanner;
+    public int exit = 1; // Integer in order to break while loop in main method
 
     public UserInterface(ToDoList constructorList, Scanner scanner) {
         this.theList = constructorList;
@@ -31,8 +35,8 @@ public class UserInterface {
     }
 
     public void ListActiveTasks() {
-        System.out.println("Press (p) to Sort Tasks by Subject \n" +
-                           "Press (d) to Sort Tasks by Date");
+        System.out.println("Press (P) to Sort Tasks by Subject \n" +
+                           "Press (D) to Sort Tasks by Date");
 
         String in = scanner.nextLine();
 
@@ -43,14 +47,14 @@ public class UserInterface {
             theList.sortByDate(theList.lists);
 
         } else {
-            System.out.println("Not a legal choice");
+            System.out.println("Not a valid choice");
         }
 
-
-        System.out.println("**************************");
+        System.out.println("Press (Enter) to restart");
     }
 
     void AddNewTask() {
+        //color codes for the visual purposes
         final String ANSI_BLUE = "\u001B[34m";
         final String ANSI_RESET = "\u001B[0m";
 
@@ -77,15 +81,84 @@ public class UserInterface {
 
     }
 
-    void EditTask() {
-        System.out.println("Choose which task to edit");
+    void EditTask() throws IOException {
+
+
+        System.out.println("Choose a task number to edit");
         theList.print();
-        System.out.println();
-        int removal = scanner.nextInt();
 
-        theList.remove(removal);
+        int lst = scanner.nextInt(); //Get user's choice for edit
+        scanner.nextLine(); // to clean the scanner
 
-        System.out.println("************ Task removed ************** ");
+        System.out.println(">> (1) Update Project");
+        System.out.println(">> (2) Update Title");
+        System.out.println(">> (3) Update Date");
+        System.out.println(">> (4) Update Status");
+        System.out.println(">> (5) Remove/Cancel \n");
+
+        System.out.println("Pick an edit option");
+
+        int in = scanner.nextInt(); //Get user's choice for edit
+        scanner.nextLine(); // to clean the scanner
+
+
+
+        //Display the title of the chosen module
+        if (in == 1) {
+            System.out.println("Enter new Project");
+            String newProject = scanner.nextLine();
+
+            ToDoList pickedList = theList.pickList(lst);
+            pickedList.setProject(newProject);
+
+        }else if (in == 2){
+            System.out.println("Enter new Title");
+            String newTitle = scanner.nextLine();
+
+            ToDoList pickedList = theList.pickList(lst);
+            pickedList.setTitle(newTitle);
+
+        }else if (in == 3) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            System.out.println("Enter new Date");
+            String scnDate = scanner.nextLine();
+
+            LocalDate newDate = LocalDate.parse(scnDate,formatter);
+
+            ToDoList pickedList = theList.pickList(lst);
+            pickedList.setDate(newDate);
+
+        }else if (in == 4) {
+            System.out.println("Enter new Status");
+            String newStatus = scanner.nextLine();
+
+            ToDoList pickedList = theList.pickList(lst);
+            pickedList.setStatus(newStatus);
+
+            if(newStatus.equals("done") || newStatus.equals("Done") ){
+                theList.remove(in);
+            }else if (newStatus.equals("active") || newStatus.equals("Active") ){
+                return;
+            } else {
+                System.out.println("Please enter active or done");
+            }
+
+
+
+        } else if (in == 5) {
+            theList.cancel(lst);
+        } else {
+
+
+            System.out.println("Please choose a valid option. Press (Enter)");
+            System.in.read(); // requires (Enter) to restart the code, in case of an invalid entry.
+
+            //int removal = scanner.nextInt();
+
+            //theList.remove(removal);
+
+            //System.out.println("************ Task removed ************** ");
+        }
     }
 
      void SaveAndQuit() {
@@ -95,22 +168,26 @@ public class UserInterface {
         todolist.writeAsObject(theList.lists);
         System.out.println("Saved and Quit");
 
+        exit++; // Breaks While loop in main method.
+
     }
 
     void QuitWithoutSave() {
 
         System.out.println("Quit");
+
+        exit++; // Breaks While loop in main method.
+
     }
 
     void startProcess() throws IOException {
 
-        while (1 == 1) {
+       // while (1 == 1) {
 
             ListMenuItems();
-//Get user's choice
 
-              int in = scanner.nextInt();
-              scanner.nextLine(); // to clean the scanner
+            int in = scanner.nextInt(); //Get user's choice
+            scanner.nextLine(); // to clean the scanner
 
             //Display the title of the chosen module
             if (in == 1)
@@ -121,14 +198,15 @@ public class UserInterface {
                 EditTask();
             else if (in == 4) {
                 QuitWithoutSave();
-                break;
+
             } else if (in == 5) {
                 SaveAndQuit();
-                break;
-            }  else
-                System.out.println("Please choose a valid option. Press (Enter)");
-                System.in.read(); // requires (Enter) to restart, in case of an invalid option
 
+            }  else {
+                System.out.println("Please choose a valid option. Press (Enter)");
+                System.in.read(); // requires (Enter) to restart the code, in case of an invalid entry.
+            }
         }
     }
-}
+
+

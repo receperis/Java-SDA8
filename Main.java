@@ -5,13 +5,9 @@ public class Main {
         ToDoList list = new ToDoList();
         Scanner scanner = new Scanner(System.in);
         UserInterface user = new UserInterface(list, scanner);
-        list.readAsData();
+        list.readAsObject();
         user.welcome();
         user.startProcess();
-
-
-
-
 
     }
 }

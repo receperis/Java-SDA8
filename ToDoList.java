@@ -5,13 +5,13 @@ import java.util.ArrayList;
 
 
 public class ToDoList implements Serializable {
-    public ArrayList<String> lists;
-    private ArrayList<String> exlist;
+    public ArrayList<ToDoList> lists;
+    private ArrayList<ToDoList> exlist;
     private String subject;
     private String title;
     private LocalDate date;
 
-    private String path = "/Users/eris/Desktop/java copy/src/";
+    private String path = "/Users/eris/Desktop/IP2/";
 
 
     public ToDoList() {
@@ -32,14 +32,14 @@ public class ToDoList implements Serializable {
 
     }
 
-    public void addItem(String task) {
+    public void addItem(ToDoList task) {
 
         lists.add(task);
     }
 
     public void print() {
         int i = 1;
-        for (String element : lists) {
+        for (ToDoList element : lists) {
             System.out.println(i + ": " + element);
             i++;
         }
@@ -58,7 +58,7 @@ public class ToDoList implements Serializable {
         lists.remove(number - 1);
     }
 
-    void writeAsData(ArrayList<String> list) {
+ /*   void writeAsData(ArrayList<String> list) {
 
         try {
             BufferedWriter bw = new BufferedWriter(new FileWriter("/Users/eris/Desktop/IP/output.txt"));
@@ -70,9 +70,51 @@ public class ToDoList implements Serializable {
             System.out.println("File is not found " + e);
         }
     }
+*/
+ public void writeAsObject(ArrayList<ToDoList> list)
+    {
+        try {
+            FileOutputStream file = new FileOutputStream(path + "output.txt");
+            ObjectOutputStream output = new ObjectOutputStream(file);
 
+            // writes objects to output stream
+            output.writeObject(list);
 
-    public ArrayList<String> readAsData() {
+            output.close();
+            file.close();
+        }
+        catch(IOException e)
+        {
+            System.out.println("File not found " +  e);
+        }
+
+    }
+
+    public ArrayList<ToDoList> readAsObject()
+    {
+        ArrayList<ToDoList> list = new ArrayList<>();
+        try {
+            FileInputStream file = new FileInputStream(path + "output.txt");
+            ObjectInputStream stream = new ObjectInputStream(file);
+
+            // read thing from the stream
+            lists = (ArrayList<ToDoList>) stream.readObject();
+
+            stream.close();
+            file.close();
+        }
+        catch(IOException  e)
+        {
+            System.out.println("File not found " +  e);
+        }
+        catch (ClassNotFoundException e)
+        {
+            System.out.println("problems inside the file " + e);
+        }
+
+        return list;
+    }
+ /*   public ArrayList<String> readAsData() {
 
 
         try {
@@ -94,55 +136,5 @@ public class ToDoList implements Serializable {
 
 
         return lists;
-    }
+    } */
 }
-/*
-    public void writeAsObject(ArrayList<ToDoList> list)
-    {
-        try {
-            FileOutputStream file = new FileOutputStream(path + "here.txt");
-            ObjectOutputStream output = new ObjectOutputStream(file);
-
-            // writes objects to output stream
-            output.writeObject(list);
-
-            output.close();
-            file.close();
-        }
-        catch(IOException e)
-        {
-            System.out.println("File not found " +  e);
-        }
-
-    }
-}
-
-      public ArrayList<ToDoList> readAsObject()
-    {
-        ArrayList<ToDoList> list = new ArrayList<>();
-        try {
-            FileInputStream file = new FileInputStream(path + "here.txt");
-            ObjectInputStream stream = new ObjectInputStream(file);
-
-            // read thing from the stream
-            list = (ArrayList<ToDoList>) stream.readObject();
-
-            stream.close();
-            file.close();
-        }
-        catch(IOException  e)
-        {
-            System.out.println("File doesn't found " +  e);
-        }
-        catch (ClassNotFoundException e)
-        {
-            System.out.println("problems inside the file " + e);
-        }
-
-        return list;
-    }
-
-
-}
-
- */

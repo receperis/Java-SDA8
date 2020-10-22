@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class UserInterface {
     private ToDoList classTypeList;
-    //private ArrayList<ToDoList> toDoList;
+
     private Scanner scanner;
 
     public UserInterface(ToDoList constructorList, Scanner scanner) {
@@ -27,8 +27,8 @@ public class UserInterface {
         System.out.println(">> (1) Show Task List (by date or project)");
         System.out.println(">> (2) Add new task");
         System.out.println(">> (3) Edit Task");
-        System.out.println(">> (4) Save and Quit");
-        System.out.println(">> (5) Quit without saving");
+        System.out.println(">> (4) Quit without saving");
+        System.out.println(">> (5) Save and Quit");
         System.out.println(">> Pick an option:");
     }
 
@@ -50,7 +50,7 @@ public class UserInterface {
 
         ToDoList newTask = new ToDoList(subject, title, date);
 
-        classTypeList.addItem(newTask.toString());
+        classTypeList.addItem(newTask);
 
 
         System.out.println(newTask + " added to the list");
@@ -68,9 +68,10 @@ public class UserInterface {
     }
 
      void SaveAndQuit() {
-        //ArrayList <ToDoList> list = new ArrayList<>();
+
         ToDoList todolist = new ToDoList();
-        todolist.writeAsData(classTypeList.lists);
+
+        todolist.writeAsObject(classTypeList.lists);
         System.out.println("Saved and Quit");
 
     }
@@ -82,13 +83,11 @@ public class UserInterface {
 
     void startProcess() {
 
-
-
         while (1 == 1) {
 
             ListMenuItems();
 //Get user's choice
-            int x = 1;
+
               int in = scanner.nextInt();
               scanner.nextLine(); // to clean the scanner
 
@@ -100,10 +99,10 @@ public class UserInterface {
             else if (in == 3)
                 EditTask();
             else if (in == 4) {
-                SaveAndQuit();
+                QuitWithoutSave();
                 break;
             } else if (in == 5) {
-                QuitWithoutSave();
+                SaveAndQuit();
                 break;
             } else
                 System.out.println("Please choose a valid option");

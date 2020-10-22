@@ -1,12 +1,12 @@
+import java.io.IOException;
 import java.util.Scanner;
 
 public class UserInterface {
-    private ToDoList classTypeList;
-    //private ArrayList<ToDoList> toDoList;
+    private ToDoList theList;
     private Scanner scanner;
 
     public UserInterface(ToDoList constructorList, Scanner scanner) {
-        this.classTypeList = constructorList;
+        this.theList = constructorList;
         this.scanner = scanner;
 
 
@@ -20,57 +20,79 @@ public class UserInterface {
 
     void ListMenuItems() {
 
-        //toDoList.readAsData();
-
-        System.out.println(">> You have " + classTypeList.getSize() + " tasks to do " +
-                "and " + classTypeList.getExListSize() + " tasks are done");
+        System.out.println(">> You have " + theList.getSize() + " tasks to do " +
+                "and " + theList.getExListSize() + " tasks are done");
         System.out.println(">> (1) Show Task List (by date or project)");
         System.out.println(">> (2) Add new task");
         System.out.println(">> (3) Edit Task");
-        System.out.println(">> (4) Save and Quit");
-        System.out.println(">> (5) Quit without saving");
-        System.out.println(">> Pick an option:");
+        System.out.println(">> (4) Quit without saving");
+        System.out.println(">> (5) Save and Quit \n");
+        System.out.print(">> Pick an option:");
     }
 
-    void ListActiveTasks() {
-        System.out.println("List of active tasks");
-        classTypeList.print();
+    public void ListActiveTasks() {
+        System.out.println("Press (p) to Sort Tasks by Subject \n" +
+                           "Press (d) to Sort Tasks by Date");
+
+        String in = scanner.nextLine();
+
+        if(in.equals("p") || in.equals("P") ) {
+            theList.sortByProject(theList.lists);
+
+        } else if (in.equals("d") || in.equals("D") ) {
+            theList.sortByDate(theList.lists);
+
+        } else {
+            System.out.println("Not a legal choice");
+        }
+
+
         System.out.println("**************************");
     }
 
     void AddNewTask() {
-        System.out.println("Please write the subject:");
+        final String ANSI_BLUE = "\u001B[34m";
+        final String ANSI_RESET = "\u001B[0m";
+
+        System.out.print("\nPlease write the Task subject:");
         String subject = scanner.nextLine();
 
-        System.out.println("Please write the title:");
+        System.out.print("Please write the Task title:");
         String title = scanner.nextLine();
 
-        System.out.println("Please write the date in YYYY-MM-DD format:");
+        System.out.print("Please write the status of Task:");
+        String status = scanner.nextLine();
+
+        System.out.print("Please write the date in YYYY-MM-DD format:");
         String date = scanner.nextLine();
 
-        ToDoList newTask = new ToDoList(subject, title, date);
+        ToDoList newTask = new ToDoList(subject, title, status, date);
 
-        classTypeList.addItem(newTask.toString());
+        theList.addItem(newTask);
 
 
-        System.out.println(newTask + " added to the list");
-        System.out.println("**************************");
+        System.out.println("*********** "+ ANSI_BLUE + newTask.title + ANSI_RESET +" added to the list  ***************");
+        System.out.println("Press (Enter) to continue");
+
 
     }
 
     void EditTask() {
-        System.out.println("Choose which task to remove");
-        classTypeList.print();
+        System.out.println("Choose which task to edit");
+        theList.print();
+        System.out.println();
         int removal = scanner.nextInt();
-        classTypeList.remove(removal);
-        System.out.println("Task removed");
-        System.out.println("************************** \n\n");
+
+        theList.remove(removal);
+
+        System.out.println("************ Task removed ************** ");
     }
 
      void SaveAndQuit() {
-        //ArrayList <ToDoList> list = new ArrayList<>();
+
         ToDoList todolist = new ToDoList();
-        todolist.writeAsData(classTypeList.lists);
+
+        todolist.writeAsObject(theList.lists);
         System.out.println("Saved and Quit");
 
     }
@@ -80,15 +102,13 @@ public class UserInterface {
         System.out.println("Quit");
     }
 
-    void startProcess() {
-
-
+    void startProcess() throws IOException {
 
         while (1 == 1) {
 
             ListMenuItems();
 //Get user's choice
-            int x = 1;
+
               int in = scanner.nextInt();
               scanner.nextLine(); // to clean the scanner
 
@@ -100,13 +120,14 @@ public class UserInterface {
             else if (in == 3)
                 EditTask();
             else if (in == 4) {
-                SaveAndQuit();
-                break;
-            } else if (in == 5) {
                 QuitWithoutSave();
                 break;
-            } else
-                System.out.println("Please choose a valid option");
+            } else if (in == 5) {
+                SaveAndQuit();
+                break;
+            }  else
+                System.out.println("Please choose a valid option. Press (Enter)");
+                System.in.read(); // requires (Enter) to restart, in case of an invalid option
 
         }
     }

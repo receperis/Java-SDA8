@@ -1,19 +1,18 @@
-ToDo-List
+## H2 ToDo-List
 
-ToDo list is a simple web application to save Your daily tasks in order not to miss anything.
+ToDo list is a simple to save Your daily tasks in order not to miss anything. The application allows the user to create new tasks, assign them a title and due date, and choose a project for that task to belong to. It employs a text based user interface via the command-line
+
 
 Features
 
+- Add new task
+- Edit task
+- Mark task as active / done
+- Delete single task
 
-Add new task
-Mark task as completed / uncompleted
-Set task priority
-Edit task
-Delete single task
-Delete completed tasks
-Delete all tasks
 
 Technologies used:
 
 - Java
+- IntelliJ
 

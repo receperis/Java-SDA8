@@ -5,10 +5,10 @@ ToDo list is a simple to save Your daily tasks in order not to miss anything. Th
 
 Features
 
-[x] Add new task
-[x] Edit task
-[x] Mark task as active / done
-[x] Delete single task
+- [x] Add new task
+- [x] Edit task
+- [x] Mark task as active / done
+- [x] Delete single task
 
 
 Technologies used:

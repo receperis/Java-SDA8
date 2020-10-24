@@ -7,13 +7,11 @@ public class Main {
     {
         FileHandler fh = new FileHandler();
         ToDoList list = fh.readWhole(); // Code starts with reading lines in the .txt file
+        ToDoList exList = fh.readWhole();
         Scanner scanner = new Scanner(System.in);
-        UserInterface user = new UserInterface(list, scanner);
+        UserInterface user = new UserInterface(list, exList, scanner);
 
         user.welcome();
-
-
-
 
 
 

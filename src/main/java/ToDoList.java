@@ -20,13 +20,15 @@ public class ToDoList implements Serializable {
     public ArrayList<Task> getActiveList(){ return activeLists;}
     public ArrayList<Task> getExList(){ return exList;}
 
-    public void print() {
+    public void print(ArrayList<Task> list) {
         int i = 1;
-        for (Task element : activeLists) {
+        for (Task element : list) {
             System.out.println(i + ": " + element);
             i++;  // lists each element in the array list with a number next to them
         }
         System.out.println("\n ------- End of Line ----\n");
+
+
     }
 
     public void addItem(Task task) {
@@ -60,12 +62,12 @@ public class ToDoList implements Serializable {
 
     public void sortByDate(ArrayList<Task> list) {
         Collections.sort(list, new CompareToSortDate());
-        print();
+        print(activeLists);
     }
 
     public void sortByProject(ArrayList<Task> list) {
         Collections.sort(list, new CompareToSortProject());
-        print();
+        print(activeLists);
     }
 }
 

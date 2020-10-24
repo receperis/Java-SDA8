@@ -43,16 +43,8 @@ public class Task implements Serializable {
         this.status=newStatus;
     }
 
-    public String getStatus(){
-        return status;
-    }
-
     public void setTitle(String newTitle){
         this.title = newTitle;
-    }
-
-    public String getTitle(){
-        return title;
     }
 
 

@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class FileHandler implements Serializable {
 
-    public String path = "/Users/eris/Desktop/IP2/";
+    public String path = "/Users/eris/Desktop/Java-SDA8/src/main/java/";
 
     public void writeWhole(ToDoList list) {
         try {

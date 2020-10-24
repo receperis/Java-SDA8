@@ -140,7 +140,7 @@ public class UserInterface {
             pickedList.setStatus(newStatus);
 
             if (newStatus.toLowerCase().equals("done")) {
-                toDo.remove(in);
+                toDo.remove(index);
             } else if (newStatus.toLowerCase().equals("active")) {
                 return;
             } else {

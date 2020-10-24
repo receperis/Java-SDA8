@@ -20,7 +20,6 @@ public class ToDoList implements Serializable {
     public ArrayList<Task> getActiveList(){ return activeLists;}
     public ArrayList<Task> getExList(){ return exList;}
 
-
     public void print() {
         int i = 1;
         for (Task element : activeLists) {
@@ -29,9 +28,6 @@ public class ToDoList implements Serializable {
         }
         System.out.println("\n ------- End of Line ----\n");
     }
-
-
-
 
     public void addItem(Task task) {
 

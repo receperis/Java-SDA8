@@ -14,6 +14,9 @@ public class Main {
 
 
 
+
+
+
         while(user.exit == 1){ // While loop in order to restart the code.
                                 // While loop breaks when "exit++" in SaveandQuit() or QuitWithoutSave() methods.
             try {

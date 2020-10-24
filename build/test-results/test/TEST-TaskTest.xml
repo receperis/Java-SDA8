@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="TaskTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-10-24T10:58:29" hostname="SDA-15-mbpro" time="0.019">
+  <properties/>
+  <testcase name="setStatusTest()" classname="TaskTest" time="0.019"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

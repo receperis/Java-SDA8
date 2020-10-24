@@ -21,14 +21,14 @@ public class UserInterface {
 
     void ListMenuItems() {
 
-        // color codes
+        // Color codes
         final String ANSI_BLUE = "\u001B[34m";
         final String ANSI_RESET = "\u001B[0m";
         final String ANSI_RED = "\u001B[31m";
 
         System.out.println(">> You have " + toDo.getSize() + " tasks to do " +
                 "and " + toDo.getExListSize() + " tasks are done");
-        System.out.println(ANSI_RED+">>" + ANSI_BLUE + " (1) " + ANSI_RESET + " Show Task List (by date or project)");
+        System.out.println(ANSI_RED+">>" + ANSI_BLUE + " (1) " + ANSI_RESET + "Show Task List (by date or project)");
         System.out.println(ANSI_RED+">>" + ANSI_BLUE + " (2) " + ANSI_RESET + "Add new task");
         System.out.println(ANSI_RED+">>" + ANSI_BLUE + " (3) " + ANSI_RESET + "Edit Task");
         System.out.println(ANSI_RED+">>" + ANSI_BLUE + " (4) " + ANSI_RESET + "Quit without saving");
